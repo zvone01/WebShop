@@ -1,0 +1,35 @@
+<div class="col-sm-12 col-md-6 col-lg-4 py-5 contact-home-info">
+   <ul class="list-unstyled">
+      <li class="media mb-5">
+         <div class="d-flex mr-4"><i class="ion-ios-pin-outline font-3x text-warning"></i></div>
+         <div class="media-body">
+            <h5 class="mb-3"> Our Location </h5>
+            <span>{{contact?.location}}</span>
+         </div>
+      </li>
+      <li class="media">
+         <div class="d-flex mr-4"><i class="ion-ios-chatboxes-outline font-3x text-warning"></i></div>
+         <div class="media-body">
+            <h5 class="mb-3"> Contact Info </h5>
+            <span *ngFor="let email of contact?.email">
+               <span *ngIf="email?.status == 1">
+                  <a href="mailto:{{email?.value}}" class="d-block mb-1 text-dark">{{email?.value}}</a>
+               </span>
+            </span>
+            <span *ngFor="let phone of contact?.phone">
+               <span *ngIf="phone?.status == 1">
+                  <a href="tel:{{phone?.value}}" class="d-block mb-1 text-dark">{{phone?.value}}</a>
+               </span>
+            </span>
+            <span *ngFor = "let hours of contact?.business_hours">
+               <span *ngIf="hours?.status == 1">
+                  {{hours?.value}}
+               </span>
+            </span>
+         </div>
+      </li>
+   </ul>
+</div>
+<div class="col-sm-12 col-md-6 col-lg-8">
+   <angly-map></angly-map>
+</div>

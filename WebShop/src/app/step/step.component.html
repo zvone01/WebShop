@@ -1,0 +1,150 @@
+<div class="product-wrapper   section-gap ">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+          <a class="btn btn-lg btn-primary mr-3 mb-3 px-4 py-2 text-white" [routerLink]="[ '/page3' ]">
+            <i class="fa fa-arrow-left"></i> Zurück
+            </a>
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+        <label *ngIf="selectionType != 'reservationCode'">
+          <!--Date:-->
+          Datum:
+          <input class="form-control" [min]="minDate" [owlDateTimeFilter]="myFilter" [(ngModel)]="Date"
+            [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5">
+          <owl-date-time [pickerMode]="'dialog'"  [stepMinute]="15" (afterPickerClosed)="DateChange()" #dt5></owl-date-time>
+        </label>
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+        <label *ngIf="selectionType != 'reservationCode'">
+          <!--Number of Persons:-->
+          Anzahl Gäste:
+          <select class="form-control" (change)="PersonNumberChagne($event.target.value)" [(value)]="PersonNumber">
+            <option *ngFor='let key of  numArray'> {{key}}</option>
+          </select>
+        </label>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-10 mb-10">
+        <div class="row razmak-sm">
+          <div class="col-sm-12 col-md-12 col-lg-12 mb-12">
+            <ul class="nav nav-pills nav-fill">
+              <h1>{{CurrentCategoryText}}</h1>
+            </ul>
+            <ul class="nav nav-pills nav-fill text-newline">
+              {{CurrentDescriptionText}}
+            </ul>
+          </div>
+        </div>
+        <div class="row razmak-sm">
+          <div class="col-sm-12 col-md-12 col-lg-12 mb-12">
+            <button type="button" *ngIf="selectedNumber > 1" (click)="back()" class="btn btn-primary">Zurück<!--Back--></button>
+            <button type="button" *ngIf="  Categories == null  ||  (selectedNumber != Categories.length && selectedNumber > 0)"
+              (click)="next()" class="btn btn-primary float-right">Weiter <!--Next--></button>
+            <a *ngIf="(Categories == null || selectedNumber == Categories.length || selectedNumber < 1) && TotalPrice != 0" routerLink="/product-cart"
+              class="btn btn-primary submit-btn  btn-lg float-right">Zum Offertenkorb<!--Checkout--></a>
+            
+              <button type="button" *ngIf="(Categories == null || selectedNumber == Categories.length
+               || selectedNumber < 1) && TotalPrice == 0" (click)="start()" class="btn btn-primary btn-lg float-right">Warenkorb leer<!--Carty empty--></button>
+          </div>
+        </div>
+
+        <div class="post-section ">
+          <div class="container">
+
+            <div class="row">
+              <div *ngFor="let product of Products" class="col-sm-4 col-md-3 col-lg-3 mb-5">
+
+                <div class="card border-0 border-rad">
+
+                  <img class="border-rad-top img-fluid w-100" [src]="getImage(product.Picture)" alt="Card image cap"
+                    width="370" height="250" routerLink="/product-detail/{{product.ID}}/{{product.VariantID}}"
+                    onMouseOver="this.style.cursor='pointer'" />
+                  <div class="card-body border-rad-bottom">
+                    <h5 class="card-title mb-3">
+                      <a routerLink="/product-detail/{{product.ID}}/{{product.VariantID}}" *ngIf="product.VariantName != 'Default'">{{product.Name}}
+                        ({{product.VariantName}}) </a>
+                      <a routerLink="/product-detail/{{product.ID}}/{{product.VariantID}}" *ngIf="product.VariantName == 'Default'">{{product.Name}}
+                      </a>
+                    </h5>
+                    <p class="card-text">{{ (product.Description .length>6)? (product.Description |
+                      slice:0:50)+'...':(product.Description
+                      ) }}</p>
+                    <div class="card-footer pt-2 p-0">
+                      <div class="d-flex justify-content-between">
+                        <a class="d-flex align-content-start text-muted"  (click)="addToCart(product)">
+                          <span class="font-sm">{{product.VariantPrice}} CHF</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="card-footer pt-2 p-0">
+                      <div class="d-flex justify-content-between">
+
+                        <a class="d-flex align-content-end" (click)="addToCart(product)">
+                          <span class="font-sm">In den Offertenkorb <!--Add to Cart--> <i class="fa fa-shopping-cart"></i></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div id="product-cart-div" class="col-md-12 col-sm-12  col-lg-2 ">
+        <div class="cart-info">
+          <div class="row">
+            <div class="bg-light py-4 px-3">
+              <h2 class="font-26 mb-4"> Offertenkorb </h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th><!--Products--> Produkte </th>
+                    <th><!--Quantity--> Menge</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="Cart != null">
+                  <tr *ngFor="let item of Cart">
+
+                    <td>
+                      <p *ngIf="item.Product.VariantName != 'Default'">{{item.Product.Name}}
+                        ({{item.Product.VariantName}}) </p>
+                      <p *ngIf="item.Product.VariantName == 'Default'">{{item.Product.Name}} </p>
+                    </td>
+                    <td class="w-15 cart-number">
+                      <input class="form-control" placeholder="0" type="number" (change)="calculateTotal()" [(ngModel)]="item.Count">
+                    </td>
+                    <td>
+                      <button type="button" class="close text-danger font-2x" (click)="removeItem(item.Product)"
+                        data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">
+                          <i class="ion-ios-close-outline"></i>
+                        </span>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><!--Total:-->Summe:</td>
+                    <td colspan="2">
+                      <b> {{TotalPrice}} CHF </b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- cart info closed -->
+      </div>
+    </div>
+  </div>
+</div>

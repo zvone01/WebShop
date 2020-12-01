@@ -1,0 +1,53 @@
+<div class="product-wrapper section-gap">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+                <button type="button" routerLink="/admin-menu" class="btn btn-primary">
+                    <i class="fa fa-arrow-left"></i> Back</button>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-6 col-sm-12 col-lg-6">
+                <form class="example-container" [formGroup]="pickDateForm" (ngSubmit)="onSubmitAdd()">
+                    <h3>Add reserved dates</h3>
+                    <label>
+                        Here grey date represent reserved dates on which is impossible to make a reservation, by
+                        selecting one date you are making that date unavailable
+                        <input [min]="minDate" class="form-control" formControlName="Date" [owlDateTimeFilter]="myFilter"
+                            [ngClass]="{ 'is-invalid': submitteda && f.Date.errors }" [owlDateTimeTrigger]="dt5"
+                            [owlDateTime]="dt5">
+                        <owl-date-time [pickerType]="'calendar'" [pickerMode]="'dialog'" #dt5></owl-date-time>
+                        <div *ngIf="submitteda && f.Date.errors" class="invalid-feedback">
+                            <!--Select proper date and time-->                                             Wählen Sie das richtige Datum und die Uhrzeit aus
+                        </div>
+                    </label>
+                    <button class="btn btn-primary btn-lg btn-50" mat-raised-button color="primary" mat-button>Submit</button>
+                </form>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-lg-6">
+                <form class="example-container" [formGroup]="pickDateForm2" (ngSubmit)="onSubmitRemove()">
+                    <h3>Remove from reserved dates</h3>
+                    <label>
+                        here grey date represents available dates on which is possible to make a reservation and
+                        clickable ones are reserved ones, by selecting one date you are making that date again
+                        available
+                        <input class="form-control" formControlName="DateRemove" [owlDateTimeFilter]="myFilter2"
+                            [ngClass]="{ 'is-invalid': submittedr && f2.DateRemove.errors }" [owlDateTimeTrigger]="dt1"
+                            [owlDateTime]="dt1">
+                        <owl-date-time [pickerType]="'calendar'" [pickerMode]="'dialog'" #dt1></owl-date-time>
+                        <div *ngIf="submittedr && f2.DateRemove.errors" class="invalid-feedback">
+                            <!--Select proper date and time-->                                             Wählen Sie das richtige Datum und die Uhrzeit aus
+                        </div>
+                    </label>
+                    <button class="btn btn-primary btn-lg btn-50" mat-raised-button color="primary" mat-button>Submit</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

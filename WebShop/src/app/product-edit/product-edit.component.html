@@ -1,0 +1,125 @@
+<div class="product-wrapper section-gap">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+            <button type="button" routerLink="/product-view" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</button>
+          </div>
+          <div class="col-sm-4 col-md-4 col-lg-4 mb-10">  </div>
+          <div class="col-sm-4 col-md-4 col-lg-4 mb-10">  </div>
+        </div>
+        <hr>
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Products</th>
+            <th>Price</th>
+            <th>Save</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="w-25 text-center">
+              <button type="button" class="close text-danger font-2x" data-dismiss="alert" aria-label="Close" (click)="deletePicture(Product.ID)">
+                <span aria-hidden="true">
+                  <i class="ion-ios-close-outline"></i>
+                </span>
+              </button>
+              <div class="image-upload">
+                <label for="{{Product.Name}}">
+                  <img [src]="getImage(Product.Picture)" width="180" height="180" class="img-fluid card-shadow" onMouseOver="this.style.cursor='pointer'"
+                  />
+                  <input type="file" (change)="onImageChanged($event, Product.ID )" style="display:none;" id="{{Product.Name}}" />
+                </label>
+
+              </div>
+            </td>
+            <td class="w-55 cart-number">
+              <label>Name:</label>
+              <input class="form-control" placeholder="Name" type="text" [(ngModel)]="Product.Name">
+              <label>Description:</label>
+              <textarea class="form-control" placeholder="Description" type="text" [(ngModel)]="Product.Description"></textarea>
+              <label>Category:</label>
+              <select class="form-control" [(ngModel)]="Product.CategoryId">
+                <option *ngFor="let category of Categories" [ngValue]="category.ID"> {{category.Name}}</option>
+              </select>
+            </td>
+            <td class="w-15 cart-number">
+              <input class="form-control" placeholder="0" type="number" [(ngModel)]="Product.Price">
+            </td>
+            <td class="w-15 cart-number">
+              <input class="btn" type="button" value="Save" (click)="change(Product)">
+              <input class="btn" type="button" value="Delete" (click)="delete(Product.ID)">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- table responsive closed -->
+    <div class="table-responsive mb-5">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number of People</th>
+              <th>Price</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ProductVariant of ProductVariants">
+  
+              <td class="w-15 cart-number">
+                <input class="form-control" placeholder="Name" type="text" [(ngModel)]="ProductVariant.Name">
+              </td>
+              <td class="w-15 cart-number">
+                <input class="form-control" placeholder="1" type="number" [(ngModel)]="ProductVariant.ForNumPeople">
+              </td>
+              <td class="w-15 cart-number">
+                <input class="form-control" placeholder="1" type="number" [(ngModel)]="ProductVariant.Price">
+              </td>
+              <td class="w-15 cart-number">
+                <input class="btn" type="button" value="Save" (click)="changeVariant(ProductVariant)">
+                <input class="btn" type="button" value="Delete" (click)="deleteVariant(ProductVariant.ID)">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-responsive mb-5">
+          Add new:
+          <form class="example-container" [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Number of People</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="w-45 cart-number">
+                    <input formControlName="Name" class="form-control" placeholder="Name" type="text">
+                  </td>
+                  <td class="w-15 cart-number">
+                    <input formControlName="ForNumPeople" class="form-control" placeholder="1" type="number">
+                  </td>
+                  <td class="w-15 cart-number">
+                    <input formControlName="Price" class="form-control" placeholder="0" type="number">
+                  </td>
+                  <td class="w-15 cart-number">
+                    <button class="btn" mat-raised-button color="primary" mat-button>Add</button>
+                  </td>
+    
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+  </div>
+  <!--container closed -->
+</div>

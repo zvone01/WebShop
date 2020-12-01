@@ -1,0 +1,106 @@
+<!-- Product Cart Wrapper closed -->
+<div class="product-wrapper section-gap">
+  <div class="container">
+
+      <button type="button"routerLink="/menu-view" class="btn btn-primary">
+          <i class="fa fa-arrow-left"></i> Back</button>
+        <hr>
+        <div class="row mb-4">
+          <div class="col-sm-12 col-md-6">
+            <div class="mb-3">
+              <h2 id="Name" class="text-capitalize font-3x mb-3" placeholder="Name">{{Menu.Name}}</h2>
+            </div>
+            <p>{{Menu.Description}}</p>
+          </div>
+        </div>
+
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="w-25 text-center">
+              <select class="form-control" ng-model="selectedProductID" (change)="productSelect($event.target.value)">
+                <option *ngFor="let product of AllProducts"  value="{{product.ID}}"> {{product.Name}}</option>
+              </select>
+            </td>
+            <td class="w-15 cart-number">
+                {{SelectedProduct.Description}}
+            </td>
+            <td class="w-15 cart-number">
+                {{SelectedProduct.Price}}
+            </td>
+            <td class="w-15 cart-number">
+                {{SelectedProduct.CategoryName}}
+            </td>
+            <td class="w-15 cart-number">
+              <button class="btn" mat-raised-button color="primary" (click) = "addMenu(Menu.ID, SelectedProduct.ID)" mat-button>Add to menu</button>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- table responsive closed -->
+  </div>
+  <!--container closed -->
+</div>
+
+<!-- Product Cart Wrapper closed -->
+<div class="product-wrapper ">
+  <div class="container">
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Products</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Save</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of Menu?.Products">
+            <td class="w-25 text-center">
+              <div class="image-upload">
+                <label for="{{product.Name}}">
+                  <img [src]="getImage(product.Picture)" width="180" height="180" class="img-fluid card-shadow" onMouseOver="this.style.cursor='pointer'"
+                  />
+                </label>
+
+              </div>
+            </td>
+            <td class="w-15 cart-number">
+              {{product.Name}}
+            </td>
+            <td class="w-15 cart-number">
+              {{product.Description}}
+            </td>
+            <td class="w-15 cart-number">
+              {{product.Price}}
+            </td>
+            <td class="w-15 cart-number">
+              {{product.CategoryName}}
+            </td>
+            <td class="w-15 cart-number">
+              <input class="btn" type="button" value="Remove" (click)="removeProduct(product.ID)">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- table responsive closed -->
+  </div>
+  <!--container closed -->
+</div>
+<!-- product wrapper closed -->

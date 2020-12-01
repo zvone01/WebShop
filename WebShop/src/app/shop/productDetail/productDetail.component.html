@@ -1,0 +1,37 @@
+<div class="product-wrapper section-gap">
+	<div class="container">
+		<button type="button" (click)="goBack()" class="btn btn-primary">
+			<i class="fa fa-arrow-left"></i> Back</button>
+		<hr>
+		<div class="row mb-4">
+			<div class="col-sm-12 col-md-6">
+
+				<div class="row">
+
+					<div class="feature-box-thumb">
+						<img [src]="getImage(product.Picture)" class="img-fluid card-shadow" alt="product image" width="380" height="380" />
+					</div>
+					<!-- feature box thumb closed -->
+				</div>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<div class="mb-3">
+					<h2 id="Name" *ngIf="product.VariantName != 'Default'" class="text-capitalize font-3x mb-3" placeholder="Name">{{product.Name}}</h2>
+					<h2 id="Name" *ngIf="product.VariantName == 'Default'" class="text-capitalize font-3x mb-3" placeholder="Name">{{product.Name}}</h2>
+					<h4 class="font-26 text-primary">{{product.VariantPrice}} CHF</h4>
+				</div>
+				<p class="text-newline">{{product.Description}}</p>
+				<div class="d-flex justify-content-between">
+					<div class="align-content-start w-50 mr-3">
+						<input class="form-control form-control-lg" [(ngModel)]="count" placeholder="1" value="1" type="number">
+					</div>
+					<div class="align-content-start w-50">
+						<a (click)="addToCart()" class="btn btn-primary btn-lg btn-block">Add To Cart</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- row closed -->
+
+	</div>
+</div>

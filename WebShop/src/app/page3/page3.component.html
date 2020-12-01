@@ -1,0 +1,43 @@
+<div class="card  text-center border-0">
+  <div class="blog-detail-thumb" style="background-image: url('assets/img/bg_datepick_logo.jpg')"></div>
+  <div class="card-img-overlay black-tp-layer  pos-center ">
+    <div class="center-holder">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+            <a class="btn btn-lg btn-outline-light mb-3 px-4 py-2 btn-chk" [routerLink]="[ '/date' ]">
+              <i class="fa fa-arrow-left"></i> Zurück
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-10 mx-auto">
+            <div class="card card-shadow border-rad">
+              <div class="card-body p-4">
+                <div class="banner-inner">
+                  <div class="banner-content container text-center container-full-width">
+
+                    <h5 >
+                      Egal für welche Variante Sie sich entscheiden, Ihre Gäste werden glücklich sein. Sie können
+                      einfach und gemütlich sich für eines unserer drei Chalet-Menüs entscheiden oder à la carte selber
+                      das Menü für Ihre Gäste zusammenstellen. Sollten Sie Gäste haben, die Käse aus verschiedenen
+                      Gründen nicht essen mögen, teilen Sie uns dies bitte im Kommentarfeld auf der Abschlussseite mit.
+                      Wir werden Ihnen Alternativen für diese Gäste vorschlagen.
+                    </h5>
+                    <a class="btn btn-lg btn-primary mr-3 mb-3 px-4 py-2 text-white" (click)="multiperson()">
+                      Unsere Chalet-Menüs
+                    </a>
+                    <a class="btn btn-lg btn-primary mb-3 px-4 py-2 text-white" (click)="singleperson()">
+                      à la carte zusammenstellen
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="pricing-section-3 py-5 bg-light">
+
+  <div class="portfolio-wrapper section-gap">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+          <button type="button" routerLink="/shop" class="btn btn-primary">
+            <i class="fa fa-arrow-left"></i> Back</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-4 mb-5" *ngFor="let menu of Menus">
+          <div class="card border-0 border-rad card-shadow m-sm-b">
+            <div class="card-body p-4">
+              <div class="card-header border-0 mb-3">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex align-content-start">
+                    <h2 class="m-0">{{menu.Name}}</h2>
+                  </div>
+                  <div class="d-flex align-content-end">
+                    <h5 class="m-0">{{menu.Price}} CHF</h5>
+                  </div>
+                </div>
+              </div>
+              <ul class="list-unstyled mb-5">
+                <li class="mb-3" *ngFor="let product of menu.Products">
+                  <i class="fa fa-check mr-2"></i>
+                  {{product.Name}}
+                </li>
+              </ul>
+              <a (click)="selectMenu(menu.ID)" class="btn btn-outline-secondary btn-pill btn-block btn-lg submit-btn">Select</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

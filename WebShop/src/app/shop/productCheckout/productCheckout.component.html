@@ -1,0 +1,184 @@
+<div class="product-wrapper section-gap">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+				<button type="button" (click)="goBack()"  class="btn btn-primary">
+					<i class="fa fa-arrow-left"></i> Zurück
+					<!--Back-->
+				</button>
+			</div>
+		</div>
+		<hr>
+		<div class="row mb-3">
+			<div class="col-sm-12 col-md-10 m-md-b">
+				<h2 class="text-capitalize font-2x mb-4">Persönliche Daten</h2>
+				<!--Fill in this form to complete order request. Fields with * are mandatory. You are gonna get an email with request confirmation, after that, we will check your request and make a final confirmation by calling you on your phone or sending you an email.-->
+				Füllen Sie dieses Formular aus, um die Reservierung abzuschließen. Felder mit * sind Pflichtfelder. Sie erhalten eine E-Mail mit der Bestätigung der Anfrage, danach werden wir Ihre Anfrage prüfen und eine endgültige Bestätigung vornehmen, indem wir Sie auf die angegebene Nummer anrufen oder Ihnen eine E-Mail zukommen lassen.
+				<form class="billing-form" [formGroup]="mailForm" (ngSubmit)="onSubmit()">
+					<div class="form-group row">
+						<div class="col-sm-12 col-md-6 m-xs-b">
+							<label>
+								<!--First Name-->Vorname <sup class="font-lg ml-1 align-bottom">*</sup></label>
+							<input formControlName="FirstName" type="text" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }"
+							 class="form-control form-control-lg" placeholder="" required />
+							<div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
+								<div *ngIf="f.FirstName.errors.required">
+									<!--First Name is required-->Vorname ist erforderlich </div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<label>
+								<!--Last Name-->Nachname *</label>
+							<input formControlName="LastName" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" type="text" class="form-control form-control-lg"
+							 placeholder="" required />
+							<div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
+								<div *ngIf="f.LastName.errors.required">
+									<!--Last Name is required-->Nachname ist erforderlich</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>
+							<!--Company Name--> Firmenname<sup class="font-lg ml-1 align-bottom"></sup></label>
+						<input formControlName="CompanyName" type="text" class="form-control form-control-lg" placeholder="" />
+
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-12 col-md-6">
+							<label><!--Email Address-->E-Mail-Addresse<sup class="font-lg ml-1 align-bottom">*</sup></label>
+							<input formControlName="Email" type="Email" [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" class="form-control form-control-lg"
+							 placeholder="" required />
+							<div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+								<div *ngIf="f.Email.errors.required"><!--Email is required-->E-Mail-Addresse ist erforderlich</div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<label>	<!--Phone-->Telefonnummer<sup class="font-lg ml-1 align-bottom">*</sup></label>
+							<input formControlName="PhoneNumber" type="Tel"  [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors }" class="form-control form-control-lg"
+							placeholder="" required />
+						   <div *ngIf="submitted && f.PhoneNumber.errors" class="invalid-feedback">
+							   <div *ngIf="f.PhoneNumber.errors.required">Telefonnummer ist erforderlich</div>
+						   </div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>	<!--Country-->Land<sup class="font-lg ml-1 align-bottom">*</sup></label>
+						<input formControlName="Country" type="text" class="form-control form-control-lg" placeholder="" />
+					</div>
+					<div class="form-group">
+						<label>Addresse<sup class="font-lg ml-1 align-bottom">*</sup></label>
+						<input formControlName="Address" type="text" [ngClass]="{ 'is-invalid': submitted && f.Address.errors }" class="form-control form-control-lg"
+						 placeholder="" required />
+						<div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+							<div *ngIf="f.Address.errors.required">Addresse ist erforderlich</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-12 col-md-6">
+							<label>
+								<!--Town/City-->Stadt<sup class="font-lg ml-1 align-bottom">*</sup></label>
+							<input formControlName="City" [ngClass]="{ 'is-invalid': submitted && f.City.errors }" type="text" class="form-control form-control-lg"
+							 placeholder="" required />
+							<div *ngIf="submitted && f.City.errors" class="invalid-feedback">
+								<div *ngIf="f.City.errors.required">
+									<!--Town/City --> Stadt ist erforderlich</div>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-6">
+							<label> Postleitzahl
+								<!--Postal Code--><sup class="font-lg ml-1 align-bottom">*</sup></label>
+							<input formControlName="PostalCode" [ngClass]="{ 'is-invalid': submitted && f.PostalCode.errors }" type="text"
+							 class="form-control form-control-lg" placeholder="" required />
+							<div *ngIf="submitted && f.PostalCode.errors" class="invalid-feedback">
+								<div *ngIf="f.PostalCode.errors.required">
+									<!--Postal Code --> Postleitzahl ist erforderlich</div>
+							</div>
+						</div>
+					</div>
+					<!--
+					<div class="form-group">
+						<label>
+							In case it is impossible to book at the selected date please select the 3 additional ones that would suit you.
+						</label>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-md-4 col-sm-12">
+							<label>
+								Additional Date Time 1:<br>
+								<input [min]="minDate" class="form-control" formControlName="Date1" [owlDateTimeFilter]="myFilter" [ngClass]="{ 'is-invalid': submitted && f.Date1.errors }"
+								 [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+								<owl-date-time [pickerMode]="'dialog'" #dt1></owl-date-time>
+								<div *ngIf="submitted && f.Date1.errors" class="invalid-feedback">
+									Select proper date and time
+								</div>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<label>
+								Additional Date Time 2:<br>
+								<input [min]="minDate" class="form-control" formControlName="Date2" [owlDateTimeFilter]="myFilter" [ngClass]="{ 'is-invalid': submitted && f.Date2.errors }"
+								 [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+								<owl-date-time [pickerMode]="'dialog'" #dt2></owl-date-time>
+								<div *ngIf="submitted && f.Date2.errors" class="invalid-feedback">
+									Select proper date and time                                             Wählen Sie das richtige Datum und die Uhrzeit aus
+								</div>
+							</label>
+						</div>
+						<div class="col-md-4 col-sm-12">
+							<label>
+								Additional Date Time 3:<br>
+								<input [min]="minDate" class="form-control" formControlName="Date3" [owlDateTimeFilter]="myFilter" [ngClass]="{ 'is-invalid': submitted && f.Date3.errors }"
+								 [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3">
+								<owl-date-time [pickerMode]="'dialog'" #dt3></owl-date-time>
+								<div *ngIf="submitted && f.Date3.errors" class="invalid-feedback">
+									Select proper date and time                                             Wählen Sie das richtige Datum und die Uhrzeit aus
+								</div>
+							</label>
+						</div>
+					</div> -->
+					<div class="form-group mb-5">
+						<label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+							<input formControlName="Receipt" type="checkbox" class="custom-control-input">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">
+								<!--Separate receipt for each person-->Wünschen Sie getrennte Belege für jede Person?</span>
+						</label>
+					</div>
+					<div class="form-group mb-5">
+						<label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+							<input formControlName="R1Receipt" type="checkbox" class="custom-control-input">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">
+								<!--R1 receipt for company -->Möchten Sie die Rechnung an die Firmenadresse, nach dem Abendessen, zugeschickt erhalten? (Nur für Firmen möglich mit Adresse in der Schweiz, nicht möglich bei Privatpersonen)</span>
+						</label>
+					</div>
+					<div class="form-group mb-5">
+						<label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+							<input formControlName="AltSuggestions" type="checkbox" class="custom-control-input">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">
+								<!--Alternative sugesstions -->Benötigen Sie alternative Vorschläge. für Gäste, die keinen Käse mögen?</span>
+						</label>
+					</div>
+					<div class="form-group mb-5">
+						<label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+							<input formControlName="Exclusive" type="checkbox" class="custom-control-input">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">
+								<!--Exclusive Chalet-->Möchten Sie den gesamten Raum für das Wunschdatum mieten?  Wir werden Sie diesbezüglich gerne kontakteren.</span>
+						</label>
+					</div>
+					
+					<div class="form-group">
+						<label>
+							<!--Order Note-->Weitere Anmerkungen</label>
+						<textarea formControlName="Note" class="form-control" rows="5"></textarea>
+					</div>
+				</form>
+			</div>
+		</div><!-- row closed -->
+		<a href="javascript:;" (click)="onSubmit()" class="btn btn-primary px-4">
+			<!-- Place request-->Offertenanfrage abschicken</a>
+	</div><!-- container closed -->
+</div><!-- product wrapper closed -->

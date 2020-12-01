@@ -1,0 +1,15 @@
+
+#from non-www to www
+RewriteEngine On
+RewriteCond %{HTTPS_HOST} !^www\. [NC]
+RewriteRule ^(.*)$ http://www.%{HTTPS_HOST}/$1 [R=301,L]
+
+#to enable direct url link like cukar.tk/login or cukar.tk/shop/1
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+RewriteRule ^ /index.html
+
+#cors
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"

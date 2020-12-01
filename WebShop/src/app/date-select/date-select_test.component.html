@@ -1,0 +1,164 @@
+<div class="card text-center border-0">
+    <div class="blog-detail-thumb" style="background-image: url('assets/img/bg_datepick_logo.jpg')"></div>
+    <div class="card-img-overlay black-tp-layer  pos-center ">
+        <div class="center-holder">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+                        <a class="btn btn-lg btn-outline-light mb-3 px-4 py-2 btn-chk" [routerLink]="[ '/home' ]">
+                            <i class="fa fa-arrow-left"></i> Zurück
+                        </a>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 mx-auto">
+                        <div class="card card-shadow border-rad">
+                            <div class="card-body p-4">
+                                <form class="example-container" [formGroup]="pickDateForm" (ngSubmit)="onSubmit()">
+                                    <div class="form-group row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <h1 *ngIf="selectionType == 'meal'"> Nur Datum prüfen</h1>
+                                            <h1 *ngIf="selectionType == 'dateAndMeal'"> Datum prüfen und anfragen</h1>
+                                            Bitte Wunschtag und Zeit wählen:<br>
+                                            <!--*Note that the date has to be approved by email or phone-->
+                                            Bitte beachten Sie, dass es sich zunächst um eine Anfrage handelt, das Datum
+                                            wird lhnen zunächst noch rückbestätigt 
+                                            <input [min]="minDate" [max]="maxDate" class="form-control"
+                                                formControlName="Date" [owlDateTimeFilter]="myFilter"
+                                                [ngClass]="{ 'glavni-datum': true, 'is-invalid': submitted && f.Date.errors }"
+                                                [owlDateTimeTrigger]="dt5" [owlDateTime]="dt5">
+                                            <owl-date-time [pickerMode]="'dialog'" [stepMinute]="15" #dt5>
+                                            </owl-date-time>
+                                            <div *ngIf="submitted && f.Date.errors" class="invalid-feedback">
+                                                <!--Select proper date and time--> Wählen Sie ein Datum und eine Uhrzeit
+                                                aus
+                                            </div>
+                                            <div *ngIf="submitted && f.Date.errors && f.Date.errors.validTime"
+                                                class="invalid-feedback">
+                                                <!--Select proper date and time-->Mindestzeit ist 18:00 Uhr
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-container">
+                                        <div class="card border-0 border-rad ">
+                                            <div class="card card-white  border-0 border-rad  bg-primary mb-2">
+                                                <div class="card-header" role="tab">
+                                                    <!--In case it is impossible to book at the selected date please select the 3
+                                                        additional ones that would suit you. -->
+                                                    Sollten wir am gewünschten Termin bereits ausgebucht sein, wäre es
+                                                    gut, wenn wir Ihr Alternativdatum bereits wissen. <br>
+                                                    Sie kein Alternativdatum haben, so können Sie die Felder leer
+                                                    lassen.
+
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <label>
+                                                                Zusätzlicher Wunschtag und Zeit 1:<br>
+                                                                <input  [min]="minDate" [max]="maxDate"
+                                                                    class="form-control" formControlName="Date1"
+                                                                    [owlDateTimeFilter]="myFilter"
+                                                                    [ngClass]="{'cursor-pointer':true, 'is-invalid': submitted && f.Date1.errors }"
+                                                                    [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                                                                <owl-date-time [pickerMode]="'dialog'" [stepMinute]="15"
+                                                                    #dt1></owl-date-time>
+                                                                <div *ngIf="submitted && f.Date1.errors"
+                                                                    class="invalid-feedback">
+                                                                    <!--Select proper date and time--> Wählen Sie ein
+                                                                    Datum und eine Uhrzeit aus
+                                                                </div>
+                                                                <div *ngIf="submitted &&  f.Date1.errors && f.Date1.errors.validTime"
+                                                                    class="invalid-feedback">
+                                                                    <!--Select proper date and time-->Mindestzeit ist
+                                                                    18:00 Uhr
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <label>
+                                                                Zusätzlicher Wunschtag und Zeit 2:<br>
+                                                                <input  [min]="minDate" [max]="maxDate"
+                                                                    class="form-control" formControlName="Date2"
+                                                                    [owlDateTimeFilter]="myFilter"
+                                                                    [ngClass]="{'cursor-pointer':true, 'is-invalid': submitted && f.Date2.errors }"
+                                                                    [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2">
+                                                                <owl-date-time [pickerMode]="'dialog'" [stepMinute]="15"
+                                                                    #dt2></owl-date-time>
+                                                                <div *ngIf="submitted && f.Date2.errors"
+                                                                    class="invalid-feedback">
+                                                                    <!--Select proper date and time--> Wählen Sie ein
+                                                                    Datum und eine Uhrzeit aus
+                                                                </div>
+                                                                <div *ngIf="submitted &&  f.Date2.errors && f.Date2.errors.validTime"
+                                                                    class="invalid-feedback">
+                                                                    <!--Select proper date and time-->Mindestzeit ist
+                                                                    18:00 Uhr
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <label>
+                                                                Zusätzlicher Wunschtag und Zeit 3:<br>
+                                                                <input  [min]="minDate" [max]="maxDate"
+                                                                    class="form-control" formControlName="Date3"
+                                                                    [owlDateTimeFilter]="myFilter"
+                                                                    [ngClass]="{'cursor-pointer':true, 'is-invalid': submitted && f.Date3.errors }"
+                                                                    [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3">
+                                                                <owl-date-time [pickerMode]="'dialog'" [stepMinute]="15"
+                                                                    #dt3></owl-date-time>
+                                                                <div *ngIf="submitted && f.Date3.errors"
+                                                                    class="invalid-feedback">
+                                                                    <!--Select proper date and time--> Wählen Sie ein
+                                                                    Datum und eine Uhrzeit aus
+                                                                </div>
+                                                                <div *ngIf="submitted && f.Date3.errors &&  f.Date3.errors.validTime"
+                                                                    class="invalid-feedback">
+                                                                    <!--Select proper date and time-->Mindestzeit ist
+                                                                    18:00 Uhr
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <label>
+                                                Anzahl Gäste, ab 8 Personen:
+                                                <!--Select Number of Persons:-->
+                                                <select class="form-control" formControlName="PersonNum"
+                                                    [ngClass]="{'cursor-pointer':true,  'is-invalid': submitted && f.Date.errors }">
+                                                    <option *ngFor='let key of  numArray' value="{{key}}"> {{key}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="submitted && f.PersonNum.errors" class="invalid-feedback">
+                                                    <!--Select number of persons--> Wählen Sie die Anzahl der Personen
+
+                                                </div>
+                                            </label> <br>
+
+                                            <label>
+                                                Gruppen bis 8 Personen bitte <a class="link"
+                                                href="https://www.bluecityhotel.ch/de/restaurant/fondue-chalet">HIER</a> zur Tischreservation
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <button class="btn btn-primary submit-btn  btn-lg btn-50" mat-raised-button
+                                        color="primary" mat-button>
+                                        <!--Next--> Weiter</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

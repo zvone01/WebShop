@@ -1,0 +1,35 @@
+.razmak{
+    padding-bottom: 3rem;
+}
+
+.btn-50{
+    width: 50%;
+}
+
+.prozirno{
+
+    background-color: rgba(0, 0, 0, 0.808);
+}
+
+.link {
+    text-decoration: underline;
+    font-weight: bold;
+    border-radius: 0.35rem;
+}
+.glavni-datum{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #b5d8f9;
+    border-color: #b89588;
+}
+.glavni-datum:focus{
+    background-color: #795548;
+    color: white;
+
+}
+.cursor-pointer{
+    cursor: pointer;
+    text-align: center;
+}

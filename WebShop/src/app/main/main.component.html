@@ -1,0 +1,15 @@
+<div #scrollContainer class="over-scroll" (scroll)="onScroll($event)" [ngClass]="{'fixed-header' : fixedHeaderClass}">
+<!--<header angly-header></header>
+<div class="razmak"></div>-->
+
+<div class="angly-base-container">
+  <div class="inner-container">
+    <div id="floater">
+      <alert></alert>
+    </div>
+		<router-outlet (activate)="onActivate($event, scrollContainer)"></router-outlet>
+  </div>
+</div>
+<!-- <footer angly-footer></footer> -->
+<footer angly-footer2></footer>
+</div>

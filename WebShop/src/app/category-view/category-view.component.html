@@ -1,0 +1,87 @@
+<div class="product-wrapper section-gap">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+        <button type="button" routerLink="/admin-menu" class="btn btn-primary">
+          <i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+    </div>
+    <hr>
+    <div class="table-responsive mb-5">
+      <form class="example-container" [formGroup]="createCategoryForm" (ngSubmit)="onSubmit()">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Ordinal Number</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="w-15 cart-number">
+                <input formControlName="Name" class="form-control" placeholder="Name" type="text">
+
+              </td>
+              <td class="w-15 cart-number">             
+                  <textarea formControlName="Description" class="form-control" placeholder="Description" type="text"></textarea>                
+                </td>
+              <td class="w-15 cart-number">
+                <input formControlName="OrdinalNumber" class="form-control" [placeholder]="highestOrdinal" type="number">
+              </td>
+              <td class="w-15 cart-number">
+                <button class="btn" mat-raised-button color="primary" mat-button>Add</button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <!-- table responsive closed -->
+  </div>
+</div>
+<!--container closed -->
+
+
+
+
+<!-- Product Cart Wrapper closed -->
+<div class="product-wrapper section-gap">
+  <div class="container">
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Order</th>
+            <th>Save</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of Categories">
+
+            <td class="w-15 cart-number">
+              <input class="form-control" placeholder="Name" type="text" [(ngModel)]="category.Name">
+            </td>
+            <td class="w-15 cart-number">
+              <textarea class="form-control" placeholder="Description" type="text" [(ngModel)]="category.Description"></textarea>
+            </td>
+            <td class="w-15 cart-number">
+              {{category.OrdinalNumber}}
+              <input class="btn" type="button" value="Up" (click)="up(category.ID)">
+              <input class="btn" type="button" value="Down" (click)="down(category.ID)">
+            </td>
+            <td class="w-15 cart-number">
+              <input class="btn" type="button" value="Save" (click)="change(category)">
+              <input class="btn" type="button" value="Delete" (click)="delete(category.ID)">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- table responsive closed -->
+  </div>
+  <!--container closed -->
+</div><!-- product wrapper closed -->

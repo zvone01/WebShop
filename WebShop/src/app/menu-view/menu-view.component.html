@@ -1,0 +1,85 @@
+<!-- Product Cart Wrapper closed -->
+<div class="product-wrapper section-gap">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+        <button type="button" routerLink="/admin-menu" class="btn btn-primary">
+          <i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+    </div>
+    <hr>
+    <div class="table-responsive mb-5">
+      <form class="example-container" [formGroup]="createMenuForm" (ngSubmit)="onSubmit()">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Save</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="w-15 cart-number">
+                <input formControlName="Name" class="form-control" placeholder="Name" type="text">
+              </td>
+              <td class="w-15 cart-number">
+                <input formControlName="Description" class="form-control" placeholder="Description" type="text">
+              </td>
+              <td class="w-15 cart-number">
+                <input formControlName="Price" class="form-control" placeholder="0" type="number">
+              </td>
+              <td class="w-15 cart-number">
+                <button class="btn" mat-raised-button color="primary" mat-button>Save</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <!-- table responsive closed -->
+  </div>
+  <!--container closed -->
+</div>
+
+<!-- Product Cart Wrapper closed -->
+<div class="product-wrapper section-gap">
+  <div class="container">
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let menu of Menus">
+            
+            <td class="w-15 cart-number">
+              <input class="form-control" placeholder="Name" type="text" [(ngModel)]="menu.Name">
+            </td>
+            <td class="w-15 cart-number">
+              <input class="form-control" placeholder="Description" type="text" [(ngModel)]="menu.Description">
+            </td>
+            <td class="w-15 cart-number">
+              <input class="form-control" placeholder="0" type="number" [(ngModel)]="menu.Price">
+            </td>
+            <td class="w-15 cart-number">
+              <input class="btn" type="button" value="Save" (click)="change(menu)">
+              <input class="btn" type="button" value="Delete" (click)="delete(menu.ID)">
+              <input class="btn" type="button" value="Edit" (click)="edit(menu.ID)">
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- table responsive closed -->
+  </div>
+  <!--container closed -->
+</div>
+<!-- product wrapper closed -->

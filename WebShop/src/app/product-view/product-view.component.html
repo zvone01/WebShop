@@ -1,0 +1,142 @@
+<!-- Product Cart Wrapper closed -->
+
+
+<div class="product-wrapper section-gap">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-md-4 col-lg-4 mb-10">
+        <button type="button" routerLink="/admin-menu" class="btn btn-primary">
+          <i class="fa fa-arrow-left"></i> Back</button>
+      </div>
+    </div>
+    <hr>
+    <div class="table-responsive mb-5">
+      <form class="example-container" [formGroup]="createProductForm" (ngSubmit)="onSubmit()">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th></th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="w-25 text-center">
+                <button type="button" class="close text-danger font-2x" data-dismiss="alert" aria-label="Close" (click)="deletePictureNew()">
+                  <span aria-hidden="true">
+                    <i class="ion-ios-close-outline"></i>
+                  </span>
+                </button>
+                <div class="image-upload">
+                  <label>
+                    <img [src]="placeholder" width="180" height="180" class="img-fluid card-shadow" onMouseOver="this.style.cursor='pointer'" />
+                    <input type="file" (change)="onImageChangedNew($event)" style="display:none;" id="test" />
+                  </label>
+
+                </div>
+              </td>
+              <td class="w-65 cart-number">
+                <label>Name:</label>
+                <input formControlName="Name" class="form-control" placeholder="Name" type="text">
+                <label>Description:</label>
+                <textarea formControlName="Description" class="form-control" placeholder="Description" type="text"></textarea>
+                <label>Category:</label>
+                <select class="form-control" formControlName="CategoryId" ng-model="selectedCategoryId">
+                  <option *ngFor="let category of Categories" ng-model="selectedCategoryId" value="{{category.ID}}"> {{category.Name}}</option>
+                </select>
+              </td>
+              <td class="w-15 cart-number">
+                <label>Price:</label>
+                <input formControlName="Price" class="form-control" placeholder="1" type="number">
+              </td>
+              <td class="w-15 cart-number">
+                <button class="btn" mat-raised-button color="primary" mat-button>Add New</button>
+
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <!-- table responsive closed -->
+  </div>
+  <!--container closed -->
+</div>
+
+<!-- Product Cart Wrapper closed -->
+<div class="product-wrapper section-gap">
+  
+  <div class="container">
+    <div>
+        <button type="button" class="btn" (click)="filterAll();">All</button>
+        <button type="button" class="btn" (click)="filterNone()">None</button>
+        <button  *ngFor="let category of Categories" type="button" (click)="filterID(category.ID)" class="btn btn-primary" [ngClass]="{'': !filtered(category.ID), 'btn-primary': filtered(category.ID)}">{{category.Name}}</button>
+    </div>
+    
+   
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Products</th>
+            <th>Price</th>
+            <th>Save</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of Products">
+            
+            <td class="w-25 text-center" *ngIf="filtered(product.OriginalCategoryID) == 1">
+              <button type="button" class="close text-danger font-2x" data-dismiss="alert" aria-label="Close" (click)="deletePicture(product.ID)">
+                <span aria-hidden="true">
+                  <i class="ion-ios-close-outline"></i>
+                </span>
+              </button>
+              <div class="image-upload">
+                <label for="{{product.ID}}">
+                  <img [src]="getImage(product.Picture)" width="180" height="180" class="img-fluid card-shadow" onMouseOver="this.style.cursor='pointer'"
+                  />
+                  <input type="file" (change)="onImageChanged($event, product.ID )" style="display:none;" id="{{product.ID}}" />
+                </label>
+
+              </div>
+            </td>
+            <td class="w-55 cart-number" *ngIf="filtered(product.OriginalCategoryID) == 1">
+              <label>Name:</label>
+              <input class="form-control" placeholder="Name" type="text" [(ngModel)]="product.Name">
+              <label>Description:</label>
+              <textarea class="form-control" placeholder="Description" type="text" [(ngModel)]="product.Description"></textarea>
+              <label>Category:</label>
+              <select class="form-control" [(ngModel)]="product.CategoryId">
+                <option *ngFor="let category of Categories" [ngValue]="category.ID"> {{category.Name}}</option>
+              </select>
+            </td>
+            <td class="w-15 cart-number" *ngIf="filtered(product.OriginalCategoryID) == 1">
+              <label>Price:</label>
+              <input class="form-control" placeholder="0" type="number" [(ngModel)]="product.Price">
+            </td>
+            <td class="w-15 cart-number" *ngIf="filtered(product.OriginalCategoryID) == 1">
+                <tr class="w-15 cart-number">        
+                    {{product.OrdinalNumber}}        
+                    <input class="btn" type="button" value="Up" (click)="up(product.ID, product.OriginalCategoryID)">
+                    <input class="btn" type="button" value="Down" (click)="down(product.ID, product.OriginalCategoryID)">
+                  </tr>
+                  <tr>
+                    <p></p>
+                      <input class="btn" type="button" value="Save" (click)="change(product)">
+                      <input class="btn" type="button" value="Delete" (click)="delete(product.ID)">
+                  </tr>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- table responsive closed -->
+  </div>
+  <!--container closed -->
+</div>
+<!-- product wrapper closed -->
